@@ -13,6 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [
+    'uses' => 'MainController@index',
+    'as' => 'index',
+]);
+
+Route::get('/success/{shorted}', [
+    'uses' => 'MainController@success',
+    'as' => 'success',
+]);
+
+Route::get('/{shorted}', [
+    'uses' => 'MainController@link',
+    'as' => 'link',
+]);
+
+Route::post('/short', [
+    'uses' => 'MainController@short',
+    'as' => 'short',
+]);
