@@ -25,10 +25,9 @@ class MainController extends Controller
     {
         echo $shorted;
     }
-    public function link($shorted)
+    public function link(Url $shorted)
     {
-        $url = Url::where('short', $shorted)->firstOrFail();
-        
-        return redirect($url->url);
+        // echo $shorted->url;
+        return redirect($shorted->url);
     }
 }

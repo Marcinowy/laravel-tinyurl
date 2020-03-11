@@ -6,5 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Url extends Model
 {
-    //
+    public function getRouteKeyName()
+    {
+        return 'short';
+    }
 }
