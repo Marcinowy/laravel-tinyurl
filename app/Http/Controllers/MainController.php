@@ -9,7 +9,8 @@ class MainController extends Controller
 {
     public function index()
     {
-        return view('main.index');
+        $totalShorted = Url::count();
+        return view('main.index', compact('totalShorted'));
     }
     public function short(Request $request)
     {
@@ -19,15 +20,16 @@ class MainController extends Controller
         $url->short = $shorted;
 
         $url->save();
-        return redirect()->route('success', ['shorted' => $shorted]);
+        return redirect()->route('success', compact('shorted'));
     }
     public function success($shorted)
     {
-        echo $shorted;
+        $totalShorted = Url::count();
+        $url = route('link', $shorted);
+        return view('main.index', compact('totalShorted', 'url'));
     }
     public function link(Url $shorted)
     {
-        // echo $shorted->url;
         return redirect($shorted->url);
     }
 }

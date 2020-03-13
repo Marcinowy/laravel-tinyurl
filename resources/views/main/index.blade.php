@@ -1,24 +1,28 @@
-@extends('layouts.main')
+@extends('layouts.main', ['totalShorted' => $totalShorted])
 
 @section('content')
-    <h4>Create your short url</h4>
-    {!! Form::open(['route' => 'short', 'class' => 'short-form']) !!}
-    <div class="d-flex align-items-end">
-        <div class="flex-grow-1">
-            <div>
-                {!! Form::label('url', 'Your long url') !!}
-            </div>
-            <div>
-                {!! Form::text('url', null, ['class' => 'form-control short-url']) !!}
-            </div>
+    @isset($url)
+        <div class="alert alert-success">
+            <strong>Success!</strong> Your short link:
+            <div><a href="{{ $url }}" target="_blank">{{ $url }}</a></div>
+            <div>Feel free to create another short link below</div>
         </div>
-        <div>
-            {!! Form::submit('Short link', ['class' => 'btn short-btn']) !!}
+    @endisset
+    <div class="card text-white bg-dark" style="max-width: 80%; margin: auto">
+        <div class="card-header">
+            Create your short url
+        </div>
+        <div class="card-body">
+            {!! Form::open(['route' => 'short']) !!}
+            <div class="form-group">
+                {!! Form::label('url', 'Your long url') !!}
+                {!! Form::text('url', null, ['class' => 'form-control']) !!}
+            </div>
+            <div class="form-group">
+                {!! Form::submit('Short link', ['class' => 'btn btn-primary float-right']) !!}
+            </div>
+            {!! Form::close() !!}
         </div>
     </div>
     {!! Form::close() !!}
-@endsection
-
-@section('css')
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/shortform.css') }}">
 @endsection
